@@ -11,6 +11,6 @@
         android:layout_height="match_parent"
         android:src="@drawable/startbackground"
         android:scaleType="centerCrop"
-        android:contentDescription="background iniziale" />
+        android:contentDescription="@string/background_iniziale" />
 
 </RelativeLayout>
