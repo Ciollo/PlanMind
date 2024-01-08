@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">PlanMind</string>
+    <string name="background_of_the_starting_interface">Background of the starting interface</string>
+    <string name="name">
+        Bentornato.
+</string>
+    <string name="hamburger_button">hamburger icon\n</string>
+    <string name="todo">
+Todo
+</string>
+</resources>
