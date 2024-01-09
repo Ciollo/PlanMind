@@ -14,4 +14,47 @@
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
+
+    <style name="view_all_date">
+        <item name="android:textSize">19sp</item>
+        <item name="android:letterSpacing">0.03</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="today_is">
+        <item name="android:textSize">20sp</item>
+        <item name="android:letterSpacing">0.15</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+    <style name="current_date_style">
+        <item name="android:textSize">23sp</item>
+        <item name="android:letterSpacing">0.2</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="this_is_you">
+        <item name="android:textSize">20sp</item>
+        <item name="android:letterSpacing">0.13</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:shadowColor">#40000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">4</item>
+        <item name="android:shadowRadius">4</item>
+    </style>
+
+    <style name="footer_app_name">
+        <item name="android:textSize">20sp</item>
+        <item name="android:letterSpacing">0.15</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+    <style name="activity_name">
+        <item name="android:textSize">24sp</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:shadowColor">#40000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">4</item>
+        <item name="android:shadowRadius">4</item>
+        <item name="android:fontFamily">@font/inria_serif</item>
+    </style>
 </resources>
