@@ -18,4 +18,7 @@ Todo
     <string name="habits_tracker">Habits Tracker</string>
     <string name="agenda">Agenda</string>
     <string name="title_agenda">Agenda</string>
+    <string name="Plaholder_add_agenda">Write activity...</string>
+    <string name="timeagenda">mm:hh</string>
+    <string name="middlescore">-</string>
 </resources>

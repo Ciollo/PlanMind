@@ -57,4 +57,23 @@
         <item name="android:shadowRadius">4</item>
         <item name="android:fontFamily">@font/inria_serif</item>
     </style>
+    <style name="timeagenda">
+        <item name="android:textSize">19sp</item>
+        <item name="android:letterSpacing">0.03</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+    <style name="labelagenda">
+        <item name="android:textSize">19sp</item>
+        <item name="android:letterSpacing">0.03</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="middlescore">
+        <item name="android:textSize">19sp</item>
+        <item name="android:letterSpacing">0.03</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:fontFamily">@font/inria_serif</item>
+    </style>
 </resources>

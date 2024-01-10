@@ -26,7 +26,7 @@
             android:layout_height="38dp"
             android:layout_below="@id/topbar"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/go_to_month"
+            android:background="@drawable/activity_item_background_rounded"
             android:clipToOutline="true"
             android:elevation="4dp">
 

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -73,6 +72,37 @@
 
         </RelativeLayout>
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/agenda_item_template"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_below="@+id/rl_options"
+            android:background="@drawable/activity_item_background_rounded"
+            android:clipToOutline="true"
+            android:elevation="4dp">
 
-</RelativeLayout>
+            <EditText
+                android:id="@+id/my_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="90dp"
+                android:layout_marginEnd="0dp"
+                android:fontFamily="@font/inria_serif"
+                android:hint="@string/Plaholder_add_agenda"
+                android:padding="5dp"
+                android:singleLine="true"
+                android:textAppearance="@style/labelagenda"
+                android:textColor="#FFFF"
+                android:textColorHint="#A9A9AC" />
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/agenda_item_template" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
