@@ -44,5 +44,16 @@ public class HamburgerActivity extends Activity {
             Intent intent = new Intent(HamburgerActivity.this, AgendaActivity.class);
             startActivity(intent);
         });
+
+        ImageButton close_button = findViewById(R.id.hamburger_close);
+        close_button.setOnClickListener(v -> {
+            Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.hamburger_press_animation);
+            v.startAnimation(animation);
+
+            finish();
+        });
+
+
+
     }
 }

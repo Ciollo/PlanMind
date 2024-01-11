@@ -20,7 +20,7 @@
         android:textAppearance="@style/name" />
 
     <ImageButton
-        android:id="@+id/hamburger_i"
+        android:id="@+id/hamburger_close"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_alignParentEnd="true"

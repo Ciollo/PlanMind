@@ -13,16 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private List<ItemActivity> mData;
-    private LayoutInflater mInflater;
-    private Context mContext;
-
-    // data is passed into the constructor
+public class MyAdapter extends MyAdapterBase<ItemActivity, MyAdapter.ViewHolder> {
     MyAdapter(Context context, List<ItemActivity> data) {
-        this.mInflater = LayoutInflater.from(context);
-        this.mData = data;
-        this.mContext = context;
+        super(context, data);
     }
 
     @Override
@@ -39,29 +32,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         holder.myEditText.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
-                // imposta l'orario nel TextView quando l'utente finisce di scrivere
-                holder.myTimeText.setText("12:00"); // sostituisci con l'orario desiderato
+                holder.myTimeText.setText("12:00");
             }
         });
 
         holder.myCheckbox.setOnCheckedChangeListener(null);
-        // set the checkbox state without triggering the listener
-        // you can store the checkbox state in a separate list in your data model
         holder.myCheckbox.setChecked(false);
         holder.myCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 holder.myEditText.setTextColor(Color.parseColor("#A9A9AC"));
                 holder.myTimeText.setTextColor(Color.parseColor("#A9A9AC"));
             } else {
-                holder.myEditText.setTextColor(Color.WHITE); // replace with original color
-                holder.myTimeText.setTextColor(Color.WHITE); // replace with original color
+                holder.myEditText.setTextColor(Color.WHITE);
+                holder.myTimeText.setTextColor(Color.WHITE);
             }
         });
-    }
-
-    @Override
-    public int getItemCount() {
-        return mData.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

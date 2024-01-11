@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class AgendaActivity extends Activity {
@@ -56,7 +57,7 @@ public class AgendaActivity extends Activity {
                         (view, hourOfDay, minute) -> {
                             String time = String.format("%02d:%02d", hourOfDay, minute);
                             data.add(new ItemActivity(text, time));
-                            Collections.sort(data, (item1, item2) -> item1.getTime().compareTo(item2.getTime()));
+                            Collections.sort(data, Comparator.comparing(ItemActivity::getTime));
                             adapter.notifyDataSetChanged();
                         }, 12, 0, true);
                 timePickerDialog.show();

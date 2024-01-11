@@ -15,16 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import java.util.Random;
 
-public class MyAdapterTodo extends RecyclerView.Adapter<MyAdapterTodo.ViewHolder> {
-    private List<ItemTodoActivity> mData;
-    private LayoutInflater mInflater;
-    private Context mContext;
+public class MyAdapterTodo extends MyAdapterBase<ItemTodoActivity, MyAdapterTodo.ViewHolder> {
     private int[] imageResources = {R.drawable.red_circle, R.drawable.green_circle};
 
     MyAdapterTodo(Context context, List<ItemTodoActivity> data) {
-        this.mInflater = LayoutInflater.from(context);
-        this.mData = data;
-        this.mContext = context;
+        super(context, data);
     }
 
     @Override
@@ -53,11 +48,6 @@ public class MyAdapterTodo extends RecyclerView.Adapter<MyAdapterTodo.ViewHolder
             }
             item.setChecked(isChecked);
         });
-    }
-
-    @Override
-    public int getItemCount() {
-        return mData.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
