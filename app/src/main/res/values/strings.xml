@@ -9,4 +9,19 @@
 Todo
 </string>
     <string name="background_iniziale">background iniziale</string>
+    <string name="view_all_date">View all date</string>
+    <string name="today_is">Today\nIs</string>
+    <string name="this_is_you">This Is Your Daily Plan\n</string>
+    <string name="app_logo">app logo</string>
+    <string name="to_do_">To-do.</string>
+    <string name="balance">Balance</string>
+    <string name="habits_tracker">Habits Tracker</string>
+    <string name="agenda">Agenda</string>
+    <string name="title_agenda">Agenda</string>
+    <string name="Plaholder_add_agenda">Write activity...</string>
+    <string name="timeagenda">mm:hh</string>
+    <string name="middlescore">-</string>
+    <string name="go_to_home">Go To Home</string>
+    <string name="title_todo">To do.</string>
+    <string name="Plaholder_add_todo">Write your to do...</string>
 </resources>

@@ -1,23 +1,256 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/home"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/home"
         android:clipToOutline="true"
         android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-       <include layout="@layout/topbar_layout"/>
-    </RelativeLayout>
+        <include
+            android:id="@+id/topbar"
+            layout="@layout/topbar_layout" />
 
+        <RelativeLayout
+            android:id="@+id/go_to_month"
+            android:layout_width="329dp"
+            android:layout_height="38dp"
+            android:layout_below="@id/topbar"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/activity_item_background_rounded"
+            android:clipToOutline="true"
+            android:elevation="4dp">
+
+            <TextView
+                android:id="@+id/view_all_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/inria_serif"
+                android:gravity="center_horizontal|center_vertical"
+                android:lineSpacingExtra="-4sp"
+                android:text="@string/view_all_date"
+                android:textAppearance="@style/view_all_date" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/day_frame"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/go_to_month"
+            android:layout_marginTop="30dp"
+            android:clipToOutline="true">
+
+            <TextView
+                android:id="@+id/today_is"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/inria_serif"
+                android:gravity="center_horizontal|center_vertical"
+                android:lineSpacingExtra="-4sp"
+                android:text="@string/today_is"
+                android:textAppearance="@style/today_is" />
+
+            <TextView
+                android:id="@+id/current_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/today_is"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/inria_serif"
+                android:textAppearance="@style/current_date_style" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/daily_plan"
+            android:layout_width="372dp"
+            android:layout_height="67dp"
+            android:layout_below="@id/day_frame"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="#404040"
+            android:clipToOutline="true"
+            android:elevation="20dp">
+
+            <TextView
+                android:id="@+id/this_is_you"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/inria_serif"
+                android:gravity="center_horizontal|center_vertical"
+                android:lineSpacingExtra="-4sp"
+                android:text="@string/this_is_you"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textAppearance="@style/this_is_you" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/activities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/daily_plan"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="#404040"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <!-- Balance Layout -->
+            <RelativeLayout
+                android:id="@+id/to_do"
+                android:layout_width="327dp"
+                android:layout_height="31dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="27dp"
+                android:background="#404040"
+                android:clipToOutline="true"
+                android:elevation="4dp">
+
+                <TextView
+                    android:id="@+id/to_do_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/inria_serif"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:lineSpacingExtra="-5sp"
+                    android:text="@string/to_do_"
+                    android:textAppearance="@style/activity_name" />
+
+                <ImageButton
+                    android:id="@+id/arrow_more_todo"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="302dp"
+                    android:background="@drawable/arrow_more" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/habits_tracker"
+                android:layout_width="327dp"
+                android:layout_height="31dp"
+                android:layout_below="@id/to_do"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="27dp"
+                android:background="#404040"
+                android:clipToOutline="true"
+                android:elevation="4dp">
+
+                <TextView
+                    android:id="@+id/habits_tracker_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/inria_serif"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:lineSpacingExtra="-5sp"
+                    android:text="@string/habits_tracker"
+                    android:textAppearance="@style/activity_name" />
+
+                <ImageButton
+                    android:id="@+id/arrow_more_habits_tracker"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="302dp"
+                    android:background="@drawable/arrow_more" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/balance"
+                android:layout_width="327dp"
+                android:layout_height="31dp"
+                android:layout_below="@id/habits_tracker"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="27dp"
+                android:layout_marginBottom="0dp"
+                android:background="#404040"
+                android:clipToOutline="true"
+                android:elevation="4dp">
+
+                <TextView
+                    android:id="@+id/balance_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/inria_serif"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:lineSpacingExtra="-5sp"
+                    android:text="@string/balance"
+                    android:textAppearance="@style/activity_name" />
+
+                <ImageButton
+                    android:id="@+id/arrow_more_"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="302dp"
+                    android:background="@drawable/arrow_more"
+                    android:contentDescription="TODO" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/agenda"
+                android:layout_width="327dp"
+                android:layout_height="31dp"
+                android:layout_below="@id/balance"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="27dp"
+                android:layout_marginBottom="5dp"
+                android:background="#404040"
+                android:clipToOutline="true"
+                android:elevation="4dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/agenda_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/inria_serif"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:lineSpacingExtra="-5sp"
+                    android:text="@string/agenda"
+                    android:textAppearance="@style/activity_name" />
+
+                <ImageButton
+                    android:id="@+id/arrow_more_agenda"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="302dp"
+                    android:background="@drawable/arrow_more" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+<!--        <include-->
+<!--            android:id="@+id/footer"-->
+<!--            layout="@layout/footer_layout" />-->
+
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

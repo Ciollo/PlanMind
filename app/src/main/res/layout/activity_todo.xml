@@ -1,0 +1,120 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#404040"
+    android:clipToOutline="true">
+
+    <include
+        android:id="@+id/topbar"
+        layout="@layout/topbar_layout" />
+
+    <RelativeLayout
+        android:id="@+id/go_to_home"
+        android:layout_width="329dp"
+        android:layout_height="38dp"
+        android:layout_below="@id/topbar"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/activity_item_background_rounded"
+        android:clipToOutline="true"
+        android:elevation="4dp">
+
+        <Button
+            android:id="@+id/btn_go_to_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/inria_serif"
+            android:gravity="center_horizontal|center_vertical"
+            android:lineSpacingExtra="-4sp"
+            android:text="@string/go_to_home"
+            android:textAppearance="@style/view_all_date"
+            android:background="@android:color/transparent" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="327dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/go_to_home"
+        android:layout_centerHorizontal="true">
+
+        <RelativeLayout
+            android:id="@+id/title_todo"
+            android:layout_width="match_parent"
+            android:layout_height="31dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="27dp"
+            android:background="#404040"
+            android:clipToOutline="true"
+            android:elevation="4dp">
+
+            <TextView
+                android:id="@+id/txt_titletodo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center_horizontal|center_vertical"
+                android:lineSpacingExtra="-5sp"
+                android:text="@string/title_todo"
+                android:textAppearance="@style/activity_name"
+                android:textSize="24sp"
+                app:lineHeight="24sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_options"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:layout_below="@+id/title_todo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="#404040"
+            android:clipToOutline="true">
+
+            <ImageButton
+                android:id="@+id/img_add"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/plus"
+                android:elevation="4dp"
+                android:src="@drawable/img_add" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/todo_item_template"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_below="@+id/rl_options"
+            android:background="@drawable/activity_item_background_rounded"
+            android:clipToOutline="true"
+            android:elevation="4dp">
+
+            <EditText
+                android:id="@+id/my_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="90dp"
+                android:layout_marginEnd="0dp"
+                android:fontFamily="@font/inria_serif"
+                android:hint="@string/Plaholder_add_todo"
+                android:padding="5dp"
+                android:singleLine="true"
+                android:textAppearance="@style/labelActivity"
+                android:textColor="#FFFF"
+                android:textColorHint="#A9A9AC" />
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/todo_item_template" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

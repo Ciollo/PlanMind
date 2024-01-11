@@ -9,6 +9,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
 public class HamburgerActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,14 +18,31 @@ public class HamburgerActivity extends Activity {
         setContentView(R.layout.activity_hamburger);
         overridePendingTransition(R.anim.fade_in, R.anim.hold);
 
-        ImageButton home = findViewById(R.id.hamburger_i);
-        home.setOnClickListener(v -> {
+        RelativeLayout homeOption = findViewById(R.id.home_option);
+        homeOption.setOnClickListener(v -> {
             Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.hamburger_press_animation);
             v.startAnimation(animation);
 
             Intent intent = new Intent(HamburgerActivity.this, HomeActivity.class);
             startActivity(intent);
         });
-    }
 
+        RelativeLayout todoOption = findViewById(R.id.todo_option);
+        todoOption.setOnClickListener(v -> {
+            Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.hamburger_press_animation);
+            v.startAnimation(animation);
+
+            Intent intent = new Intent(HamburgerActivity.this, TodoActivity.class);
+            startActivity(intent);
+        });
+
+        RelativeLayout agendaOption = findViewById(R.id.agenda_option);
+        agendaOption.setOnClickListener(v -> {
+            Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.hamburger_press_animation);
+            v.startAnimation(animation);
+
+            Intent intent = new Intent(HamburgerActivity.this, AgendaActivity.class);
+            startActivity(intent);
+        });
+    }
 }

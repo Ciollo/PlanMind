@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PlanMind"
+        android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
@@ -23,6 +23,8 @@
         </activity>
         <activity android:name=".HomeActivity" />
         <activity android:name=".HamburgerActivity" />
-    </application>
+        <activity android:name=".AgendaActivity" />
+        <activity android:name=".TodoActivity"/>
+           </application>
 
 </manifest>

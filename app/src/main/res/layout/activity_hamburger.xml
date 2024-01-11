@@ -31,11 +31,42 @@
             android:clipToOutline="true">
 
             <RelativeLayout
-                android:id="@+id/hamburger_o"
+                android:id="@+id/home_option"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToOutline="true"
-                android:elevation="4dp">
+                android:elevation="4dp"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:id="@+id/home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="Home"
+                    android:textAppearance="@style/hamburger_options"/>
+
+                <View
+                    android:id="@+id/arrow_more_home"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/arrow_more" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/todo_option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/home_option"
+                android:clipToOutline="true"
+                android:elevation="4dp"
+                android:layout_marginBottom="10dp">
 
                 <TextView
                     android:id="@+id/todo"
@@ -44,14 +75,39 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dp"
-                    android:fontFamily="@font/inria_serif"
-                    android:gravity="center_vertical"
-                    android:lineSpacingExtra="-5sp"
-                    android:text="@string/todo"
-                    android:textAppearance="@style/todo" />
+                    android:text="Todo"
+                    android:textAppearance="@style/hamburger_options"/>
 
                 <View
-                    android:id="@+id/arrow_more_"
+                    android:id="@+id/arrow_more_todo"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/arrow_more" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/agenda_option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/todo_option"
+                android:clipToOutline="true"
+                android:elevation="4dp">
+
+                <TextView
+                    android:id="@+id/agenda"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="Agenda"
+                    android:textAppearance="@style/hamburger_options"/>
+
+                <View
+                    android:id="@+id/arrow_more_agenda"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_alignParentRight="true"

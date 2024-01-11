@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/todo_item_template_layout"
+    android:layout_height="38dp"
+    android:background="@drawable/activity_item_background_rounded"
+    android:clipToOutline="true"
+    android:layout_margin="10dp"
+    android:elevation="4dp">
+
+    <CheckBox
+        android:id="@+id/my_checkbox"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:buttonTint="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/my_time_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/my_checkbox"
+        android:layout_centerVertical="true"
+        android:text=""
+        android:layout_marginStart="10dp"
+        android:textAppearance="@style/labelActivity"
+        android:textColor="#FFFF" />
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/my_time_text">
+
+        <EditText
+            android:id="@+id/my_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="0dp"
+            android:fontFamily="@font/inria_serif"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:text=""
+            android:textAppearance="@style/labelActivity"
+            android:textColor="#FFFF" />
+    </HorizontalScrollView>
+</RelativeLayout>
