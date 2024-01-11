@@ -21,4 +21,7 @@ Todo
     <string name="Plaholder_add_agenda">Write activity...</string>
     <string name="timeagenda">mm:hh</string>
     <string name="middlescore">-</string>
+    <string name="go_to_home">Go To Home</string>
+    <string name="title_todo">To do.</string>
+    <string name="Plaholder_add_todo">Write your to do...</string>
 </resources>

@@ -41,5 +41,10 @@ public class HomeActivity extends Activity {
             startActivity(intent);
         });
 
+        RelativeLayout toDoLayout = findViewById(R.id.to_do);
+        toDoLayout.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, TodoActivity.class);
+            startActivity(intent);
+        });
     }
 }

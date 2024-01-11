@@ -24,6 +24,7 @@
         <activity android:name=".HomeActivity" />
         <activity android:name=".HamburgerActivity" />
         <activity android:name=".AgendaActivity" />
-    </application>
+        <activity android:name=".TodoActivity"/>
+           </application>
 
 </manifest>

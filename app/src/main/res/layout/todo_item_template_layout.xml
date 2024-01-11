@@ -10,7 +10,7 @@
     android:elevation="4dp">
 
     <CheckBox
-        android:id="@+id/my_checkbox"
+        android:id="@+id/todo_checkbox"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_alignParentStart="true"
@@ -22,24 +22,21 @@
         android:layout_marginBottom="10dp"
         android:buttonTint="#FFFFFF" />
 
-    <TextView
-        android:id="@+id/my_time_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/my_checkbox"
+    <ImageView
+        android:id="@+id/todo_image"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_toEndOf="@id/todo_checkbox"
         android:layout_centerVertical="true"
-        android:text=""
-        android:layout_marginStart="10dp"
-        android:textAppearance="@style/labelActivity"
-        android:textColor="#FFFF" />
+        android:layout_marginStart="10dp" />
 
     <HorizontalScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/my_time_text">
+        android:layout_toEndOf="@id/todo_image">
 
         <EditText
-            android:id="@+id/my_edit_text"
+            android:id="@+id/todo_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"

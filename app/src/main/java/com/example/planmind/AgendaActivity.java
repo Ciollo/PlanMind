@@ -3,12 +3,17 @@ package com.example.planmind;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.app.TimePickerDialog;
+
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +32,15 @@ public class AgendaActivity extends Activity {
         setContentView(R.layout.activity_agenda);
         overridePendingTransition(R.anim.fade_in, R.anim.hold);
 
+        ImageButton hamburger = findViewById(R.id.hamburger_i);
+
+        hamburger.setOnClickListener(v -> {
+            Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.hamburger_press_animation);
+            v.startAnimation(animation);
+
+            Intent intent = new Intent(AgendaActivity.this, HamburgerActivity.class);
+            startActivity(intent);
+        });
         data = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -48,6 +62,12 @@ public class AgendaActivity extends Activity {
                 timePickerDialog.show();
             }
             editText.setText("");
+        });
+
+        Button homeButton = findViewById(R.id.btn_go_to_home);
+        homeButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
         });
     }
 }

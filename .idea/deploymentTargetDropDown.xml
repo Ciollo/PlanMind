@@ -5,6 +5,9 @@
       <entry key="MainActivity">
         <State />
       </entry>
+      <entry key="TodoActivity">
+        <State />
+      </entry>
     </value>
   </component>
 </project>
