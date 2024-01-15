@@ -1,5 +1,11 @@
 package com.example.planmind;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
+
 public class ItemTodoActivity {
     private boolean checked;
     private String text;

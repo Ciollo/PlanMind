@@ -3,7 +3,10 @@ package com.example.planmind;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -32,6 +35,7 @@ public class AgendaActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agenda);
         overridePendingTransition(R.anim.fade_in, R.anim.hold);
+        super.onResume();
 
         ImageButton hamburger = findViewById(R.id.hamburger_i);
 
@@ -59,16 +63,63 @@ public class AgendaActivity extends Activity {
                             data.add(new ItemActivity(text, time));
                             Collections.sort(data, Comparator.comparing(ItemActivity::getTime));
                             adapter.notifyDataSetChanged();
+
+                            // Salva nel database
+                            AgendaDbHelper dbHelper = new AgendaDbHelper(this);
+                            SQLiteDatabase db = dbHelper.getWritableDatabase();
+                            ContentValues values = new ContentValues();
+                            values.put("title", text);
+                            values.put("time", time);
+                            long newRowId = db.insert("agenda", null, values);
                         }, 12, 0, true);
                 timePickerDialog.show();
             }
             editText.setText("");
         });
-
         Button homeButton = findViewById(R.id.btn_go_to_home);
         homeButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        data.clear();
+        data.addAll(loadAgendaFromDb());
+        Collections.sort(data, Comparator.comparing(ItemActivity::getTime));
+        adapter.notifyDataSetChanged();
+    }
+    private List<ItemActivity> loadAgendaFromDb() {
+        AgendaDbHelper dbHelper = new AgendaDbHelper(this);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String[] projection = {
+                "id",
+                "title",
+                "time"
+        };
+
+        Cursor cursor = db.query(
+                "agenda",
+                projection,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+
+        List<ItemActivity> items = new ArrayList<>();
+        while(cursor.moveToNext()) {
+            String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
+            String time = cursor.getString(cursor.getColumnIndexOrThrow("time"));
+            items.add(new ItemActivity(title, time));
+        }
+        cursor.close();
+
+        return items;
     }
 }
