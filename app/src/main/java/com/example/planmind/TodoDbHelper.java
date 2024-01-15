@@ -13,8 +13,7 @@ public class TodoDbHelper extends SQLiteOpenHelper {
                     "id" + " INTEGER PRIMARY KEY," +
                     "completed" + " INTEGER," +
                     "description" + " TEXT," +
-                    "priority" + " INTEGER)";
-
+                    "completitionCicle" + " TEXT)";
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + "Todo";
 

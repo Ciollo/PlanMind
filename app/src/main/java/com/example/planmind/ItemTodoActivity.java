@@ -9,9 +9,9 @@ import android.widget.ImageButton;
 public class ItemTodoActivity {
     private boolean checked;
     private String text;
-    private int imageResource;
+    private String imageResource;
 
-    public ItemTodoActivity(boolean checked, String text, int imageResource) {
+    public ItemTodoActivity(boolean checked, String text, String imageResource) {
         this.checked = checked;
         this.text = text;
         this.imageResource = imageResource;
@@ -29,11 +29,11 @@ public class ItemTodoActivity {
         return text;
     }
 
-    public int getImageResource() {
+    public String getImageResource() {
         return imageResource;
     }
 
-    public void setImageResource(int imageResource) {
+    public void setImageResource(String imageResource) {
         this.imageResource = imageResource;
     }
 }

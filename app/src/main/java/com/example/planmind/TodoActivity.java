@@ -47,7 +47,7 @@ public class TodoActivity extends Activity {
                 EditText editText = findViewById(R.id.my_edit_text);
                 String text = editText.getText().toString().trim();
                 if (!text.isEmpty()) {
-                    ItemTodoActivity newItem = new ItemTodoActivity(false, text, R.drawable.red_circle);
+                    ItemTodoActivity newItem = new ItemTodoActivity(false, text,null);
 
                     // Aggiungi l'elemento alla lista e aggiorna il RecyclerView
                     data.add(newItem);
@@ -61,7 +61,11 @@ public class TodoActivity extends Activity {
                     ContentValues values = new ContentValues();
                     values.put("completed", newItem.isChecked() ? 1 : 0);
                     values.put("description", newItem.getText());
-                    values.put("priority", newItem.getImageResource());
+                    if (newItem.isChecked()) {
+                        values.put("completitionCicle", R.drawable.green_circle);
+                    } else {
+                        values.put("completitionCicle", R.drawable.red_circle);
+                    }
 
                     long newRowId = db.insert("todo", null, values);
                 }
@@ -109,15 +113,16 @@ public class TodoActivity extends Activity {
         );
 
         List<ItemTodoActivity> items = new ArrayList<>();
-        while(cursor.moveToNext()) {
+        while (cursor.moveToNext()) {
             boolean completed = cursor.getInt(cursor.getColumnIndexOrThrow("completed")) == 1;
             String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
-            int priority = cursor.getInt(cursor.getColumnIndexOrThrow("priority"));
-            items.add(new ItemTodoActivity(completed, description, priority));
-        }
-        cursor.close();
+            String imgPath = cursor.getString(cursor.getColumnIndexOrThrow("completitionCicle"));
+            items.add(new ItemTodoActivity(completed, description, imgPath));
+            cursor.close();
 
-        return items;
+            return items;
+        }
+        return null;
     }
     @Override
     public void onResume() {
