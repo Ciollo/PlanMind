@@ -47,7 +47,6 @@ public class TodoActivity extends Activity {
                 EditText editText = findViewById(R.id.my_edit_text);
                 String text = editText.getText().toString().trim();
                 if (!text.isEmpty()) {
-                    // Crea un nuovo elemento Todo
                     ItemTodoActivity newItem = new ItemTodoActivity(false, text, R.drawable.red_circle);
 
                     // Aggiungi l'elemento alla lista e aggiorna il RecyclerView
@@ -58,6 +57,7 @@ public class TodoActivity extends Activity {
                     TodoDbHelper dbHelper = new TodoDbHelper(TodoActivity.this);
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
 
+//                    TODO se un todo è completo allora viene mostrato il pallino verde senno rosso
                     ContentValues values = new ContentValues();
                     values.put("completed", newItem.isChecked() ? 1 : 0);
                     values.put("description", newItem.getText());
