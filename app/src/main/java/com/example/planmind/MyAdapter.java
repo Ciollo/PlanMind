@@ -31,11 +31,6 @@ public class MyAdapter extends MyAdapterBase<ItemActivity, MyAdapter.ViewHolder>
         holder.myEditText.setText(item.getText());
         holder.myTimeText.setText(item.getTime());
 
-//        holder.myEditText.setOnFocusChangeListener((v, hasFocus) -> {
-//            if (!hasFocus) {
-//                holder.myTimeText.setText("12:00");
-//            }
-//        });
 
         holder.myCheckbox.setOnCheckedChangeListener(null);
         holder.myCheckbox.setChecked(false);
