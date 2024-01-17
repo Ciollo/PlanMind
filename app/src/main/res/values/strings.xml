@@ -26,4 +26,5 @@ Todo
     <string name="Plaholder_add_todo">Write your to do...</string>
     <string name="no">no</string>
     <string name="yes">yes</string>
+    <string name="addbutton">addButton</string>
 </resources>

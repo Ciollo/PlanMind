@@ -45,7 +45,7 @@ public class TodoDbHelper extends SQLiteOpenHelper {
         String selection = "id" + " = ?";
         String[] selectionArgs = { String.valueOf(id) };
 
-        int count = db.update(
+        db.update(
                 "todo",
                 values,
                 selection,

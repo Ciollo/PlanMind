@@ -7,16 +7,13 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TodoActivity extends Activity {
-    private MyAdapterTodo adapter;
-    private List<ItemTodoActivity> data;
+    private MyAdapterTodo todoAdapter;
+    private List<ItemTodoActivity> todoItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,77 +32,91 @@ public class TodoActivity extends Activity {
         overridePendingTransition(R.anim.fade_in, R.anim.hold);
         super.onResume();
 
-        data = new ArrayList<>();
+        todoItems = new ArrayList<>();
+        setupRecyclerView();
+        setupAddButton();
+        setupHamburgerButton();
+        setupGoHomeButton();
+    }
+
+    private void setupRecyclerView() {
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MyAdapterTodo(this, data);
-        recyclerView.setAdapter(adapter);
+        todoAdapter = new MyAdapterTodo(this, todoItems);
+        recyclerView.setAdapter(todoAdapter);
+        setupItemTouchHelper(recyclerView);
+    }
 
-        // Add ItemTouchHelper
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+    private void setupItemTouchHelper(RecyclerView recyclerView) {
+        ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
             @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
             }
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                // Get the position of the item to be deleted
                 int position = viewHolder.getAdapterPosition();
-
-                new AlertDialog.Builder(TodoActivity.this)
-                        .setTitle("Conferma eliminazione")
-                        .setMessage("Vuoi eliminare questo elemento?")
-                        .setPositiveButton(android.R.string.yes, (dialog, which) -> {
-                            ItemTodoActivity item = data.get(position);
-
-                            TodoDbHelper dbHelper = new TodoDbHelper(TodoActivity.this);
-                            dbHelper.deleteTodoItem(item.getId());
-
-                            data.remove(position);
-                            adapter.notifyItemRemoved(position);
-                        })
-                        .setNegativeButton(android.R.string.no, (dialog, which) -> adapter.notifyItemChanged(position)) // restore item
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
+                showDeleteConfirmationDialog(position);
             }
         };
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
+    }
+    private void showDeleteConfirmationDialog(int position) {
+        new AlertDialog.Builder(TodoActivity.this)
+                .setTitle("Delete item")
+                .setMessage("Do you want to delete this item?")
+                .setPositiveButton(android.R.string.yes, (dialog, which) -> deleteItem(position))
+                .setNegativeButton(android.R.string.no, (dialog, which) -> todoAdapter.notifyItemChanged(position))
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
 
+    private void deleteItem(int position) {
+        ItemTodoActivity item = todoItems.get(position);
+        TodoDbHelper todoDbHelper = new TodoDbHelper(TodoActivity.this);
+        todoDbHelper.deleteTodoItem(item.getId());
+        todoItems.remove(position);
+        todoAdapter.notifyItemRemoved(position);
+        todoDbHelper.close();
+    }
+
+    private void setupAddButton() {
         ImageButton addButton = findViewById(R.id.img_add);
-        addButton.setOnClickListener(v -> {
-            EditText editText = findViewById(R.id.my_edit_text);
-            String text = editText.getText().toString().trim();
-            if (!text.isEmpty()) {
-                ItemTodoActivity newItem = new ItemTodoActivity(false, text);
+        addButton.setOnClickListener(v -> addItem());
+    }
 
-                TodoDbHelper dbHelper = new TodoDbHelper(TodoActivity.this);
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-                ContentValues values = new ContentValues();
-                if (newItem.isChecked()) {
-                    values.put("completed", 1);
-                } else {
-                    values.put("completed", 0);
-                }
-
-                values.put("description", newItem.getText());
-
-                long newRowId = db.insert("todo", null, values);
-
-                newItem.setId((int) newRowId);
-
-                data.add(newItem);
-                adapter.notifyDataSetChanged();
-            }
+    private void addItem() {
+        EditText editText = findViewById(R.id.my_edit_text);
+        String text = editText.getText().toString().trim();
+        if (!text.isEmpty()) {
+            ItemTodoActivity newItem = new ItemTodoActivity(false, text);
+            insertItemIntoDb(newItem);
+            todoItems.add(newItem);
+            todoAdapter.notifyItemInserted(todoItems.size() - 1);
             editText.setText("");
-        });
+        }
+    }
 
+    private void insertItemIntoDb(ItemTodoActivity item) {
+        TodoDbHelper todoDbHelper = new TodoDbHelper(TodoActivity.this);
+        SQLiteDatabase database = todoDbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("completed", item.isChecked() ? 1 : 0);
+        values.put("description", item.getText());
+
+        long newItemId = database.insert("todo", null, values);
+        item.setId((int) newItemId);
+
+        database.close();
+    }
+
+    private void setupHamburgerButton() {
         ImageButton hamburger = findViewById(R.id.hamburger_i);
-
         hamburger.setOnClickListener(v -> {
             Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.hamburger_press_animation);
             v.startAnimation(animation);
@@ -113,15 +124,16 @@ public class TodoActivity extends Activity {
             Intent intent = new Intent(TodoActivity.this, HamburgerActivity.class);
             startActivity(intent);
         });
+    }
 
-        RelativeLayout todoLayout = findViewById(R.id.go_to_home);
-        Button todoButton = findViewById(R.id.btn_go_to_home);
-
-        todoButton.setOnClickListener(v -> {
+    private void setupGoHomeButton() {
+        Button goHomeButton = findViewById(R.id.btn_go_to_home);
+        goHomeButton.setOnClickListener(v -> {
             Intent intent = new Intent(TodoActivity.this, HomeActivity.class);
             startActivity(intent);
         });
     }
+
     private List<ItemTodoActivity> loadTodoFromDb() {
         TodoDbHelper dbHelper = new TodoDbHelper(this);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -154,13 +166,13 @@ public class TodoActivity extends Activity {
 
         return items;
     }
+
     @Override
     public void onResume() {
         super.onResume();
 
-        data.clear();
-        data.addAll(loadTodoFromDb());
-        adapter.notifyDataSetChanged();
+        todoItems.clear();
+        todoItems.addAll(loadTodoFromDb());
+        todoAdapter.notifyDataSetChanged();
     }
-
 }

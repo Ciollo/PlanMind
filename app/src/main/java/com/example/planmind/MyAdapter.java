@@ -2,13 +2,13 @@ package com.example.planmind;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -18,8 +18,9 @@ public class MyAdapter extends MyAdapterBase<ItemActivity, MyAdapter.ViewHolder>
         super(context, data);
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.agenda_item_template_layout, parent, false);
         return new ViewHolder(view);
     }
@@ -30,11 +31,11 @@ public class MyAdapter extends MyAdapterBase<ItemActivity, MyAdapter.ViewHolder>
         holder.myEditText.setText(item.getText());
         holder.myTimeText.setText(item.getTime());
 
-        holder.myEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            if (!hasFocus) {
-                holder.myTimeText.setText("12:00");
-            }
-        });
+//        holder.myEditText.setOnFocusChangeListener((v, hasFocus) -> {
+//            if (!hasFocus) {
+//                holder.myTimeText.setText("12:00");
+//            }
+//        });
 
         holder.myCheckbox.setOnCheckedChangeListener(null);
         holder.myCheckbox.setChecked(false);

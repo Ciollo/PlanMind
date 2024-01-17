@@ -1,30 +1,29 @@
 package com.example.planmind;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-import java.util.Random;
 
 public class MyAdapterTodo extends MyAdapterBase<ItemTodoActivity, MyAdapterTodo.ViewHolder> {
-    private int[] imageResources = {R.drawable.red_circle, R.drawable.green_circle};
+    private final int[] imageResources = {R.drawable.red_circle, R.drawable.green_circle};
 
     MyAdapterTodo(Context context, List<ItemTodoActivity> data) {
         super(context, data);
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.todo_item_template_layout, parent, false);
         return new ViewHolder(view);
     }
@@ -59,6 +58,7 @@ public class MyAdapterTodo extends MyAdapterBase<ItemTodoActivity, MyAdapterTodo
             item.setChecked(isChecked);
             TodoDbHelper dbHelper = new TodoDbHelper(holder.itemView.getContext());
             dbHelper.updateTodoItem(item.getId(), item.isChecked());
+            dbHelper.close();
         });
     }
     public static class ViewHolder extends RecyclerView.ViewHolder {
