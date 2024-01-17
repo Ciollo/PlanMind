@@ -5,16 +5,42 @@ import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 public class ItemTodoActivity {
+    private Integer id;
     private boolean checked;
     private String text;
-    private String imageResource;
+    private String completitionCirclePath;
 
-    public ItemTodoActivity(boolean checked, String text, String imageResource) {
+    public ItemTodoActivity(boolean checked, String text) {
+        this.id = null;
         this.checked = checked;
         this.text = text;
-        this.imageResource = imageResource;
+        if (checked) {
+            completitionCirclePath = "green_circle";
+        } else {
+            completitionCirclePath = "red_circle";
+        }
+    }
+
+    public ItemTodoActivity(int id, boolean checked, String text) {
+        this.id = id;
+        this.checked = checked;
+        this.text = text;
+        if (checked) {
+            completitionCirclePath = "green_circle";
+        } else {
+            completitionCirclePath = "red_circle";
+        }
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public boolean isChecked() {
@@ -29,11 +55,7 @@ public class ItemTodoActivity {
         return text;
     }
 
-    public String getImageResource() {
-        return imageResource;
-    }
-
-    public void setImageResource(String imageResource) {
-        this.imageResource = imageResource;
+    public String getCompletitionCirclePath() {
+        return completitionCirclePath;
     }
 }

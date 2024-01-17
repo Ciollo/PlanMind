@@ -1,5 +1,6 @@
 package com.example.planmind;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -32,7 +33,16 @@ public class MyAdapterTodo extends MyAdapterBase<ItemTodoActivity, MyAdapterTodo
     public void onBindViewHolder(ViewHolder holder, int position) {
         ItemTodoActivity item = mData.get(position);
         holder.myEditText.setText(item.getText());
+
         holder.myImage.setImageResource(imageResources[item.isChecked() ? 1 : 0]);
+
+        if (item.isChecked()) {
+            holder.myEditText.setTextColor(Color.parseColor("#A9A9AC"));
+            holder.myEditText.setPaintFlags(holder.myEditText.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        } else {
+            holder.myEditText.setTextColor(Color.WHITE);
+            holder.myEditText.setPaintFlags(holder.myEditText.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+        }
 
         holder.myCheckbox.setOnCheckedChangeListener(null);
         holder.myCheckbox.setChecked(item.isChecked());
@@ -47,9 +57,10 @@ public class MyAdapterTodo extends MyAdapterBase<ItemTodoActivity, MyAdapterTodo
                 holder.myImage.setImageResource(imageResources[0]);
             }
             item.setChecked(isChecked);
+            TodoDbHelper dbHelper = new TodoDbHelper(holder.itemView.getContext());
+            dbHelper.updateTodoItem(item.getId(), item.isChecked());
         });
     }
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
         EditText myEditText;
         CheckBox myCheckbox;

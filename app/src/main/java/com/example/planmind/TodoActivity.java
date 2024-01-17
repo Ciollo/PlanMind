@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,37 +41,67 @@ public class TodoActivity extends Activity {
         adapter = new MyAdapterTodo(this, data);
         recyclerView.setAdapter(adapter);
 
-        ImageButton addButton = findViewById(R.id.img_add);
-        addButton.setOnClickListener(new View.OnClickListener() {
+        // Add ItemTouchHelper
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
             @Override
-            public void onClick(View v) {
-                EditText editText = findViewById(R.id.my_edit_text);
-                String text = editText.getText().toString().trim();
-                if (!text.isEmpty()) {
-                    ItemTodoActivity newItem = new ItemTodoActivity(false, text,null);
-
-                    // Aggiungi l'elemento alla lista e aggiorna il RecyclerView
-                    data.add(newItem);
-                    adapter.notifyDataSetChanged();
-
-                    // Salva l'elemento nel database
-                    TodoDbHelper dbHelper = new TodoDbHelper(TodoActivity.this);
-                    SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-//                    TODO se un todo è completo allora viene mostrato il pallino verde senno rosso
-                    ContentValues values = new ContentValues();
-                    values.put("completed", newItem.isChecked() ? 1 : 0);
-                    values.put("description", newItem.getText());
-                    if (newItem.isChecked()) {
-                        values.put("completitionCicle", R.drawable.green_circle);
-                    } else {
-                        values.put("completitionCicle", R.drawable.red_circle);
-                    }
-
-                    long newRowId = db.insert("todo", null, values);
-                }
-                editText.setText("");
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
             }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                // Get the position of the item to be deleted
+                int position = viewHolder.getAdapterPosition();
+
+                new AlertDialog.Builder(TodoActivity.this)
+                        .setTitle("Conferma eliminazione")
+                        .setMessage("Vuoi eliminare questo elemento?")
+                        .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                            ItemTodoActivity item = data.get(position);
+
+                            TodoDbHelper dbHelper = new TodoDbHelper(TodoActivity.this);
+                            dbHelper.deleteTodoItem(item.getId());
+
+                            data.remove(position);
+                            adapter.notifyItemRemoved(position);
+                        })
+                        .setNegativeButton(android.R.string.no, (dialog, which) -> adapter.notifyItemChanged(position)) // restore item
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
+        ImageButton addButton = findViewById(R.id.img_add);
+        addButton.setOnClickListener(v -> {
+            EditText editText = findViewById(R.id.my_edit_text);
+            String text = editText.getText().toString().trim();
+            if (!text.isEmpty()) {
+                ItemTodoActivity newItem = new ItemTodoActivity(false, text);
+
+                TodoDbHelper dbHelper = new TodoDbHelper(TodoActivity.this);
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+                ContentValues values = new ContentValues();
+                if (newItem.isChecked()) {
+                    values.put("completed", 1);
+                } else {
+                    values.put("completed", 0);
+                }
+
+                values.put("description", newItem.getText());
+
+                long newRowId = db.insert("todo", null, values);
+
+                newItem.setId((int) newRowId);
+
+                data.add(newItem);
+                adapter.notifyDataSetChanged();
+            }
+            editText.setText("");
         });
 
         ImageButton hamburger = findViewById(R.id.hamburger_i);
@@ -99,7 +130,6 @@ public class TodoActivity extends Activity {
                 "id",
                 "completed",
                 "description",
-                "priority"
         };
 
         Cursor cursor = db.query(
@@ -114,15 +144,15 @@ public class TodoActivity extends Activity {
 
         List<ItemTodoActivity> items = new ArrayList<>();
         while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
             boolean completed = cursor.getInt(cursor.getColumnIndexOrThrow("completed")) == 1;
             String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
-            String imgPath = cursor.getString(cursor.getColumnIndexOrThrow("completitionCicle"));
-            items.add(new ItemTodoActivity(completed, description, imgPath));
-            cursor.close();
-
-            return items;
+            ItemTodoActivity item = new ItemTodoActivity(id, completed, description);
+            items.add(item);
         }
-        return null;
+        cursor.close();
+
+        return items;
     }
     @Override
     public void onResume() {
@@ -132,4 +162,5 @@ public class TodoActivity extends Activity {
         data.addAll(loadTodoFromDb());
         adapter.notifyDataSetChanged();
     }
+
 }
