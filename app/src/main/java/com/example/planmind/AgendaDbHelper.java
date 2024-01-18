@@ -1,5 +1,8 @@
 package com.example.planmind;
+
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -28,5 +31,27 @@ public class AgendaDbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public void updateAgendaItem(int id, String title, String time) {
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        ContentValues values = new ContentValues();
+        values.put("title", title);
+        values.put("time", time);
+
+        String selection = "id" + " = ?";
+        String[] selectionArgs = { String.valueOf(id) };
+
+        db.update(
+                "agenda",
+                values,
+                selection,
+                selectionArgs);
+    }
+
+    public void deleteAgendaItem(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String whereClause = "id=?";
+        String[] whereArgs = new String[] { String.valueOf(id) };
+        db.delete("agenda", whereClause, whereArgs);
+    }
 }
