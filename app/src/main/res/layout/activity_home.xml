@@ -21,32 +21,10 @@
             layout="@layout/topbar_layout" />
 
         <RelativeLayout
-            android:id="@+id/go_to_month"
-            android:layout_width="329dp"
-            android:layout_height="38dp"
-            android:layout_below="@id/topbar"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/activity_item_background_rounded"
-            android:clipToOutline="true"
-            android:elevation="4dp">
-
-            <TextView
-                android:id="@+id/view_all_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="@font/inria_serif"
-                android:gravity="center_horizontal|center_vertical"
-                android:lineSpacingExtra="-4sp"
-                android:text="@string/view_all_date"
-                android:textAppearance="@style/view_all_date" />
-        </RelativeLayout>
-
-        <RelativeLayout
             android:id="@+id/day_frame"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_below="@id/go_to_month"
+            android:layout_below="@id/topbar"
             android:layout_marginTop="30dp"
             android:clipToOutline="true">
 
@@ -144,78 +122,10 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/habits_tracker"
-                android:layout_width="327dp"
-                android:layout_height="31dp"
-                android:layout_below="@id/to_do"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="27dp"
-                android:background="#404040"
-                android:clipToOutline="true"
-                android:elevation="4dp">
-
-                <TextView
-                    android:id="@+id/habits_tracker_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:fontFamily="@font/inria_serif"
-                    android:gravity="center_horizontal|center_vertical"
-                    android:lineSpacingExtra="-5sp"
-                    android:text="@string/habits_tracker"
-                    android:textAppearance="@style/activity_name" />
-
-                <ImageButton
-                    android:id="@+id/arrow_more_habits_tracker"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="302dp"
-                    android:background="@drawable/arrow_more" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/balance"
-                android:layout_width="327dp"
-                android:layout_height="31dp"
-                android:layout_below="@id/habits_tracker"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="27dp"
-                android:layout_marginBottom="0dp"
-                android:background="#404040"
-                android:clipToOutline="true"
-                android:elevation="4dp">
-
-                <TextView
-                    android:id="@+id/balance_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:fontFamily="@font/inria_serif"
-                    android:gravity="center_horizontal|center_vertical"
-                    android:lineSpacingExtra="-5sp"
-                    android:text="@string/balance"
-                    android:textAppearance="@style/activity_name" />
-
-                <ImageButton
-                    android:id="@+id/arrow_more_"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="302dp"
-                    android:background="@drawable/arrow_more"
-                    android:contentDescription="TODO" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
                 android:id="@+id/agenda"
                 android:layout_width="327dp"
                 android:layout_height="31dp"
-                android:layout_below="@id/balance"
+                android:layout_below="@id/to_do"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="27dp"
                 android:layout_marginBottom="5dp"

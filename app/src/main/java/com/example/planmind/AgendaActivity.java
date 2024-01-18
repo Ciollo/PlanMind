@@ -2,27 +2,22 @@ package com.example.planmind;
 
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.app.TimePickerDialog;
-
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -61,7 +56,7 @@ public class AgendaActivity extends Activity {
                         (view, hourOfDay, minute) -> {
                             String time = String.format("%02d:%02d", hourOfDay, minute);
                             data.add(new ItemActivity(text, time));
-                            Collections.sort(data, Comparator.comparing(ItemActivity::getTime));
+                            data.sort(Comparator.comparing(ItemActivity::getTime));
                             adapter.notifyDataSetChanged();
 
                             // Salva nel database
@@ -70,7 +65,8 @@ public class AgendaActivity extends Activity {
                             ContentValues values = new ContentValues();
                             values.put("title", text);
                             values.put("time", time);
-                            long newRowId = db.insert("agenda", null, values);
+                            db.insert("agenda", null, values);
+                            db.close();
                         }, 12, 0, true);
                 timePickerDialog.show();
             }
@@ -89,7 +85,7 @@ public class AgendaActivity extends Activity {
 
         data.clear();
         data.addAll(loadAgendaFromDb());
-        Collections.sort(data, Comparator.comparing(ItemActivity::getTime));
+        data.sort(Comparator.comparing(ItemActivity::getTime));
         adapter.notifyDataSetChanged();
     }
     private List<ItemActivity> loadAgendaFromDb() {

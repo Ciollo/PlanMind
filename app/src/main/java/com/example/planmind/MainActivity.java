@@ -14,13 +14,11 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         overridePendingTransition(R.anim.fade_in, R.anim.hold);
 
-        // Esempio di animazione di transizione
 
-        // Utilizzare un Handler per ritardare l'avvio della HomeActivity
         new Handler().postDelayed(() -> {
             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(intent);
             finish();
-        }, 4000); // Ritardo di 4 secondi
+        }, 4000);
     }
 }

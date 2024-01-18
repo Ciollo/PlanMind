@@ -20,7 +20,6 @@ public class HomeActivity extends Activity {
         setContentView(R.layout.activity_home);
         overridePendingTransition(R.anim.fade_in, R.anim.hold);
 
-
         TextView dateTextView = (TextView) findViewById(R.id.current_date);
         String currentDate = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
         dateTextView.setText(currentDate);
